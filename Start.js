@@ -75,7 +75,7 @@ bot.on("callback_query", (query) => {
     };
     const imageURL =
       "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
-    bot.sendMessage(chatId, imageURL, options).catch((error) => {
+    bot.sendMessage(chatId, imageURL,options).catch((error) => {
       console.log("Error sending message:", error);
     });
   }
