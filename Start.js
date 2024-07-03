@@ -30,6 +30,7 @@ bot.onText(/\/start/, (msg) => {
     });
 });
 
+
 bot.on("callback_query", (query) => {
   const chatId = query.message.chat.id;
 
@@ -52,14 +53,15 @@ bot.on("callback_query", (query) => {
         ],
       },
     };
-    bot.sendMessage(chatId, options.caption, options).catch((error) => {
-      console.log("Error sending message:", error);
+    const imageURL = "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
+    bot.sendPhoto(chatId, imageURL, options).catch((error) => {
+      console.log("Error sending photo:", error);
     });
   } else if (query.data === "chinese") {
     userLanguagePreferences[chatId] = "chinese";
     const options = {
       caption:
-        "您选择了英语！加密货币项目推广：通过定向广告解决方案提升加密货币和Web3项目的曝光度",
+        "您选择了英语！加密货币项目推广：通过定向广告解决方案提升加密货币和Web3项目的曝光度\n\n您选择了中文！",
       reply_markup: {
         inline_keyboard: [
           [
@@ -73,10 +75,9 @@ bot.on("callback_query", (query) => {
         ],
       },
     };
-    const imageURL =
-      "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
-    bot.sendMessage(chatId, imageURL,options).catch((error) => {
-      console.log("Error sending message:", error);
+    const imageURL = "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
+    bot.sendPhoto(chatId, imageURL, options).catch((error) => {
+      console.log("Error sending photo:", error);
     });
   }
 
@@ -85,6 +86,7 @@ bot.on("callback_query", (query) => {
     console.log("Error answering callback query:", error);
   });
 });
+
 
 // Example of sending a message based on the user's language preference
 bot.onText(/\/example/, (msg) => {
@@ -106,9 +108,9 @@ bot.onText(/\/example/, (msg) => {
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
 
-  if (msg.chat.type === 'group' || msg.chat.type === 'supergroup') {
-    bot.sendMessage(chatId, "Hello group! I'm here to assist.").catch((error) => {
+  if ((msg.chat.type === 'group' || msg.chat.type === 'supergroup') && msg.text === '/start') {
+    bot.sendMessage(chatId, "Hello group! I'm here to assist with the /start command.").catch((error) => {
       console.log("Error sending message:", error);
     });
-  }
+  } 
 });
