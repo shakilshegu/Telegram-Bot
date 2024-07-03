@@ -103,3 +103,12 @@ bot.onText(/\/example/, (msg) => {
     });
   }
 });
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
+
+  if (msg.chat.type === 'group' || msg.chat.type === 'supergroup') {
+    bot.sendMessage(chatId, "Hello group! I'm here to assist.").catch((error) => {
+      console.log("Error sending message:", error);
+    });
+  }
+});
