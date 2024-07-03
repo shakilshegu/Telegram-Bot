@@ -36,12 +36,45 @@ bot.on("callback_query", (query) => {
   // Set the user's language preference
   if (query.data === "english") {
     userLanguagePreferences[chatId] = "english";
-    bot.sendMessage(chatId, "You have selected English!").catch((error) => {
+    const options = {
+      caption:
+        "Cryptocurrency Projects: Facilitating exposure for cryptocurrency, and Web3 projects through targeted advertising solutions",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "❤️Button 1", callback_data: "button1" },
+            { text: "📁Button 2", callback_data: "button2" },
+          ],
+          [
+            { text: "💕Button 3", callback_data: "button3" },
+            { text: "👍Button 4👍", callback_data: "button4" },
+          ],
+        ],
+      },
+    };
+    bot.sendMessage(chatId, options.caption, options).catch((error) => {
       console.log("Error sending message:", error);
     });
   } else if (query.data === "chinese") {
     userLanguagePreferences[chatId] = "chinese";
-    bot.sendMessage(chatId, "您选择了中文！").catch((error) => {
+    const options = {
+      caption:
+        "您选择了英语！加密货币项目推广：通过定向广告解决方案提升加密货币和Web3项目的曝光度",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "❤️按钮 1", callback_data: "button1" },
+            { text: "📁按钮 2", callback_data: "button2" },
+          ],
+          [
+            { text: "💕按钮 3", callback_data: "button3" },
+            { text: "👍按钮 4👍", callback_data: "button4" },
+          ],
+        ],
+      },
+    };
+
+    bot.sendMessage(chatId, options.caption, options).catch((error) => {
       console.log("Error sending message:", error);
     });
   }
