@@ -1,7 +1,8 @@
 const TelegramBot = require("node-telegram-bot-api");
+require("dotenv").config();
 
 // Replace the value below with the Telegram token you receive from @BotFather
-const token = "7181897528:AAF01LSVMvO1DxU_p6hTk29SNBCMuwtw8pw";
+const token = process.env.TELEGRAM_BOT_TOKEN;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
@@ -30,7 +31,6 @@ bot.onText(/\/start/, (msg) => {
     });
 });
 
-
 bot.on("callback_query", (query) => {
   const chatId = query.message.chat.id;
 
@@ -53,7 +53,8 @@ bot.on("callback_query", (query) => {
         ],
       },
     };
-    const imageURL = "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
+    const imageURL =
+      "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
     bot.sendPhoto(chatId, imageURL, options).catch((error) => {
       console.log("Error sending photo:", error);
     });
@@ -75,7 +76,8 @@ bot.on("callback_query", (query) => {
         ],
       },
     };
-    const imageURL = "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
+    const imageURL =
+      "https://cdn.pixabay.com/photo/2017/08/14/14/38/bitcoin-2640692_1280.png";
     bot.sendPhoto(chatId, imageURL, options).catch((error) => {
       console.log("Error sending photo:", error);
     });
@@ -86,7 +88,6 @@ bot.on("callback_query", (query) => {
     console.log("Error answering callback query:", error);
   });
 });
-
 
 // Example of sending a message based on the user's language preference
 bot.onText(/\/example/, (msg) => {
@@ -105,12 +106,20 @@ bot.onText(/\/example/, (msg) => {
     });
   }
 });
-bot.on('message', (msg) => {
+bot.on("message", (msg) => {
   const chatId = msg.chat.id;
 
-  if ((msg.chat.type === 'group' || msg.chat.type === 'supergroup') && msg.text === '/start') {
-    bot.sendMessage(chatId, "Hello group! I'm here to assist with the /start command.").catch((error) => {
-      console.log("Error sending message:", error);
-    });
-  } 
+  if (
+    (msg.chat.type === "group" || msg.chat.type === "supergroup") &&
+    msg.text === "/start"
+  ) {
+    bot
+      .sendMessage(
+        chatId,
+        "Hello group! I'm here to assist with the /start command."
+      )
+      .catch((error) => {
+        console.log("Error sending message:", error);
+      });
+  }
 });
